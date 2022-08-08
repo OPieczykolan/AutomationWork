@@ -1,0 +1,90 @@
+{
+	"info": {
+		"_postman_id": "849abce2-d0ff-418a-ae84-d16281faa343",
+		"name": "Is Luke Skywalker from Tatooine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Luke Skywalker planet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Poeple/1 is Luke Skywalker\", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.name).to.eql(\"Luke Skywalker\");\r",
+							"});\r",
+							"\r",
+							"const responseJson = pm.response.json();\r",
+							"pm.globals.set(\"LooksHomeworld\", responseJson.homeworld);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://swapi.dev/api/people/1",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"dev"
+					],
+					"path": [
+						"api",
+						"people",
+						"1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Luke Skywalker Planet result check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Planet is Tatooine\", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.name).to.eql(\"Tatooine\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{LooksHomeworld}}",
+					"host": [
+						"{{LooksHomeworld}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
